@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
+const taskRoutes = require("./routes/taskRoutes")
 
 // load .env variables
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(express.json()); // IMPORTANT FIX
 
 // routes
 app.use('/api/auth', authRoutes);
+app.use('/api/tasks',taskRoutes)
 
 // connect to database
 connectDB();
