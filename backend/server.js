@@ -2,6 +2,8 @@
 const exprees = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv')
+const authRoutes = require('./routes/authRoutes')
+
 
 //doteenv
 dotenv.config();
@@ -13,6 +15,8 @@ const connectDB = require('./config/db')
 const app= exprees();
 app.use(cors())
 app.use(exprees.json)
+
+app.use('/api/auth',authRoutes)
 
 // connect to database
 connectDB();
