@@ -1,40 +1,34 @@
 // import modules
-const exprees = require('express');
+const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv')
-const authRoutes = require('./routes/authRoutes')
+const dotenv = require('dotenv');
+const authRoutes = require('./routes/authRoutes');
 
-
-//doteenv
+// load .env variables
 dotenv.config();
 
-//db import
-const connectDB = require('./config/db')
+// db import
+const connectDB = require('./config/db');
 
-//express app
-const app= exprees();
-app.use(cors())
-app.use(exprees.json)
+// express app
+const app = express();
+app.use(cors());
+app.use(express.json()); // IMPORTANT FIX
 
-app.use('/api/auth',authRoutes)
+// routes
+app.use('/api/auth', authRoutes);
 
 // connect to database
 connectDB();
 
-//router
+// test route
+app.get('/', (req, res) => {
+    res.send("Neura backend is running 🚀");
+});
 
-app.get('/',(req,res)=>{
+// server listen
+const port = process.env.PORT || 8080;
 
-    res.send("dai neura is backend got is pluse buddy....")
-
-
-})
-
-//server listen
-
-const port = process.env.PORT || 5000; //|| or gate
-
-app.listen(port,()=>{
-
-    console.log("neura is backend server is running at port:",port);
-})
+app.listen(port, () => {
+    console.log("neura backend server is running at port:", port);
+});
